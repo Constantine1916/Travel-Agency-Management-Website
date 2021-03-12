@@ -1,11 +1,3 @@
-/*
- * @Description  : 
- * @Author       : sunjr
- * @Date         : 2021-03-12 10:43:21
- * @LastEditors  : sunjr
- * @LastEditTime : 2021-03-12 12:27:45
- * @FilePath     : \test\vue.config.js
- */
 module.exports = {
   lintOnSave: false,
   css: {
