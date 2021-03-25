@@ -111,7 +111,7 @@ export default {
           if (values.userName === 'admin' && values.password === '123456') {
             this.$message.success('登录成功！')
             // 跳转到home
-            this.$router.push({ path: '/' })
+            this.$router.push({ path: '/home' })
           } else {
             this.$message.error('用户名或密码错误！')
           }
