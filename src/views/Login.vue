@@ -7,7 +7,7 @@
             <img :src="getImgUrl(props.i)" />
           </a>
           <div v-for="item in 4">
-            <img :src="require('../assets/login' + item + '.jpg')" />
+            <img :src="require('../assets/images/login' + item + '.jpg')" />
           </div>
         </a-carousel>
       </div>
@@ -89,7 +89,7 @@ export default {
   methods: {
     // 获取图片
     getImgUrl(i) {
-      return require(`../assets/login${i + 1}.jpg`)
+      return require(`../assets/images/login${i + 1}.jpg`)
     },
     // 仅在触发字段后显示错误 userName
     userNameError() {
