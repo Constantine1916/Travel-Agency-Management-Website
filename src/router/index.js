@@ -1,3 +1,11 @@
+/*
+ * @Description  : 
+ * @Author       : sunjr
+ * @Date         : 2021-03-12 12:33:22
+ * @LastEditors  : sunjr
+ * @LastEditTime : 2021-03-28 01:53:18
+ * @FilePath     : \travel-agency-management-website\src\router\index.js
+ */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -15,13 +23,43 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Layout.vue'),
+    children: [
+      {
+        name: 'home',
+        path: '',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
+      },
+      {
+        name: 'accountManage',
+        path: 'accountManage',
+        component: () => import(/* webpackChunkName: "about" */ '../views/AccountManage.vue')
+      },
+      {
+        name: 'travelAgencyInfoManage',
+        path: 'travelAgencyInfoManage',
+        component: () => import(/* webpackChunkName: "about" */ '../views/TravelAgencyInfoManage.vue')
+      },
+      {
+        name: 'financialStatements',
+        path: 'financialStatements',
+        component: () => import(/* webpackChunkName: "about" */ '../views/FinancialStatements.vue')
+      },
+      {
+        name: 'scenicSpotTicket',
+        path: 'scenicSpotTicket',
+        component: () => import(/* webpackChunkName: "about" */ '../views/ScenicSpotTicket.vue')
+      },
+      {
+        name: 'scenicSpotNumber',
+        path: 'scenicSpotNumber',
+        component: () => import(/* webpackChunkName: "about" */ '../views/ScenicSpotNumber.vue')
+      },
+      {
+        path: '*',
+        redirect: '/home' // 错误路由重定向
+      }
+    ]
   }
 ]
 
