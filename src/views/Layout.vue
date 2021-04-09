@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-03-28 01:40:10
+ * @LastEditTime : 2021-04-09 16:20:05
  * @FilePath     : \travel-agency-management-website\src\views\Layout.vue
 -->
 <template>
@@ -55,6 +55,7 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-header class="header">
+        <Breadcrumb></Breadcrumb>
       </a-layout-header>
       <a-layout-content class="content">
         <router-view />
@@ -66,7 +67,12 @@
   </a-layout>
 </template>
 <script>
+import Breadcrumb from "../components/Breadcrumb"
+
 export default {
+  components: {
+    Breadcrumb,
+  },
   data() {
     return {
     }
@@ -74,7 +80,6 @@ export default {
   methods: {
     // 左侧栏跳转事件
     goTo(e) {
-      console.log('path', this.$route.path);
       if (e.key === 'home') {
         this.$router.push({ path: '/home' }).catch(err => {
           this.$message.warn('您已在当前页面！')
