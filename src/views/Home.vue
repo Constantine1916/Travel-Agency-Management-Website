@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-10 21:29:59
+ * @LastEditTime : 2021-04-10 22:12:56
  * @FilePath     : \travel-agency-management-website\src\views\Home.vue
 -->
 <template>
@@ -16,17 +16,19 @@
     </div>
     <div class="cardContainer">
       <template v-for="card in cardData">
-        <a-card hoverable>
-          <img
-            slot="cover"
-            :src="require('../assets/images/' + card.img + '.jpg')"
-          />
-          <a-card-meta :title="card.scenicSpot">
-            <template slot="description">
-              {{card.img}}
-            </template>
-          </a-card-meta>
-        </a-card>
+        <div class="card">
+          <a-card hoverable>
+            <img
+              slot="cover"
+              :src="require('../assets/images/' + card.img + '.jpg')"
+            />
+            <a-card-meta :title="card.scenicSpot">
+              <template slot="description">
+                <span>景区合作旅行社</span>
+              </template>
+            </a-card-meta>
+          </a-card>
+        </div>
       </template>
     </div>
   </div>
@@ -72,8 +74,39 @@ const cityScenic = [
         img: 'chengduJinLi'
       },
       {
+        scenicSpot: '宽窄巷子',
+        img: 'chengduKuanZhai'
+      },
+      {
         scenicSpot: '西岭雪山',
         img: 'chengduXiLing'
+      }
+    ]
+  },
+  {
+    name: 'mianyang',
+    scenic: [
+      {
+        scenicSpot: '仙海',
+        img: 'mianyangXianHai'
+      }
+    ]
+  },
+  {
+    name: 'nanjing',
+    scenic: [
+      {
+        scenicSpot: '中山陵',
+        img: 'nanjingZhongShanLing'
+      }
+    ]
+  },
+  {
+    name: 'xuzhou',
+    scenic: [
+      {
+        scenicSpot: '云龙山',
+        img: 'xuzhouYunLongShan'
       }
     ]
   }
@@ -118,14 +151,18 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    .ant-card {
-      width: 240px;
-      height: 333px;
-      margin-right: 10px;
-      .ant-card-cover {
-        img {
-          height: 250px;
-          width: 100%;
+    .card {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      .ant-card {
+        width: 240px;
+        height: 333px;
+        .ant-card-cover {
+          img {
+            height: 250px;
+            width: 100%;
+          }
         }
       }
     }
