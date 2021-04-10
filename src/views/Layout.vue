@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-09 16:20:05
+ * @LastEditTime : 2021-04-09 18:15:31
  * @FilePath     : \travel-agency-management-website\src\views\Layout.vue
 -->
 <template>
@@ -56,6 +56,7 @@
     <a-layout>
       <a-layout-header class="header">
         <Breadcrumb></Breadcrumb>
+        <Avatar></Avatar>
       </a-layout-header>
       <a-layout-content class="content">
         <router-view />
@@ -67,11 +68,13 @@
   </a-layout>
 </template>
 <script>
+import Avatar from "../components/Avatar"
 import Breadcrumb from "../components/Breadcrumb"
 
 export default {
   components: {
-    Breadcrumb,
+    Avatar,
+    Breadcrumb
   },
   data() {
     return {
@@ -151,6 +154,8 @@ export default {
       background: #FFF;
       box-shadow: 0px 1px 4px 0px rgba(0,21,41,0.22);
       border-bottom: 1px solid #F0F2F5;
+      display: flex;
+      flex-wrap: wrap;
     }
     .content {
       padding: 10px;

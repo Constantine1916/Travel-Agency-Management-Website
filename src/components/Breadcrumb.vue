@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-04-09 10:06:14
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-09 17:57:59
+ * @LastEditTime : 2021-04-10 17:54:26
  * @FilePath     : \travel-agency-management-website\src\components\Breadcrumb.vue
 -->
 <template>
@@ -59,7 +59,7 @@ export default {
 </script>
 <style lang="scss">
   .breadcrumbContainer {
-    width: 100%;
+    width: 95%;
     height: 100%;
     display: flex;
     justify-content: flex-start;
