@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-10 22:12:56
+ * @LastEditTime : 2021-04-10 22:40:16
  * @FilePath     : \travel-agency-management-website\src\views\Home.vue
 -->
 <template>
@@ -137,8 +137,6 @@ export default {
 .Home {
   width: 100%;
   height: 100%;
-  // background-image: url("../assets/images/homeImage.jpg");
-  // background-size: cover;
   .selectCity {
     height: 21px;
     width: 100%;
