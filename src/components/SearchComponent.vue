@@ -3,28 +3,28 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-12 16:11:59
+ * @LastEditTime : 2021-04-15 17:37:39
  * @FilePath     : \travel-agency-management-website\src\components\SearchComponent.vue
 -->
 <template>
   <div class="searchComponent">
     <div class="nameSearch">
-      <a-input placeholder="请输入旅行社名称查询" />
+      <a-input placeholder="请输入旅行社名称查询"  v-model="searchData.travelAgencyName" />
     </div>
     <div class="ownerSearch">
-      <a-input placeholder="请输入旅行社法定代表人名称查询" />
+      <a-input placeholder="请输入旅行社法定代表人名称查询" v-model="searchData.ownerName" />
     </div>
     <div class="citySearch">
       <div class="title">请选择城市:</div>
-      <a-select @change="cityChange">
+      <a-select v-model="searchData.cityName" @change="cityChange">
         <template v-for="city in cityData">
           <a-select-option :value="city.value">{{city.name}}</a-select-option>
         </template>
       </a-select>
     </div>
     <div class="buttonContainer">
-      <a-button class="search">查询</a-button>
-      <a-button class="clear">重置</a-button>
+      <a-button class="search" @click="search()" >查询</a-button>
+      <a-button class="clear" @click="clear()">重置</a-button>
     </div>
   </div>
 </template>
@@ -68,12 +68,31 @@ export default {
   data() {
     return {
       cityData, // 城市的数据
-      searchData: [] // emit出去的用户录入数据
+      searchData: { // emit出去的用户录入数据
+        travelAgencyName: '', // input v-model
+        ownerName: '', // input v-model
+        cityName: '' // 城市下拉
+      }
     }
   },
   methods: {
+    // 清除数据
+    clear() {
+      this.searchData = {
+        travelAgencyName: '',
+        ownerName: '',
+        cityName: ''
+      }
+      console.log('searchData', this.searchData);
+    },
+    // emit 出去 searchData
+    search() {
+      console.log('searchData', this.searchData);
+      this.$emit('search', this.searchData)
+    },
+    // 城市下拉change
     cityChange(value) {
-      console.log('value', value);
+      this.searchData.cityName = value;
     }
   }
 }
@@ -110,6 +129,8 @@ export default {
     justify-content: flex-end;
     .search {
       margin-right: 10px;
+      background: #007AFF;
+      color: white;
     }
   }
 }

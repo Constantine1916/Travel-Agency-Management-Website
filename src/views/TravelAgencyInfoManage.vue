@@ -3,13 +3,13 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-12 15:35:16
+ * @LastEditTime : 2021-04-15 17:42:08
  * @FilePath     : \travel-agency-management-website\src\views\TravelAgencyInfoManage.vue
 -->
 <template>
   <div class="travelAgencyInfoManage">
     <div class="searchContainer">
-      <SearchComponent></SearchComponent>
+      <SearchComponent @search="handleSearch"></SearchComponent>
     </div>
     <div class="table">
 
@@ -25,6 +25,11 @@ export default {
   data() {
     return {
       
+    }
+  },
+  methods: {
+    handleSearch(val) {
+      console.log('val', val);
     }
   }
 }
