@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-16 17:53:21
+ * @LastEditTime : 2021-04-28 23:46:57
  * @FilePath     : \travel-agency-management-website\src\views\TravelAgencyInfoManage.vue
 -->
 <template>
@@ -26,14 +26,14 @@ const tableColumns = [
     dataIndex: 'travelAgencyName',
     key: 'travelAgencyName',
     ellipsis: true,
-    width: 500
+    width: 360
   },
   {
     title: '法定代表人',
     dataIndex: 'ownerName',
     key: 'ownerName',
     ellipsis: true,
-    width: 300
+    width: 260
   },
   {
     title: '旅行社所属地区',
@@ -46,30 +46,34 @@ const tableColumns = [
     title: '操作',
     dataIndex: 'operation',
     key: 'operation',
+    // width: 300
   }
 ];
 
 const tableData = [
   {
     key: '1',
-    travelAgencyName: 'John Brown',
-    age: 32,
-    ownerName: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    travelAgencyName: '欢天喜地旅行社',
+    ownerName: 'Sean Park',
+    cityName: '绵阳',
   },
   {
     key: '2',
-    travelAgencyName: 'Jim Green',
-    age: 42,
-    ownerName: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    travelAgencyName: '走南闯北旅行社',
+    ownerName: 'Jhon Constantine',
+    cityName: '成都',
   },
   {
     key: '3',
-    travelAgencyName: 'Joe Black',
-    age: 32,
-    ownerName: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
+    travelAgencyName: '世界美景旅行社',
+    ownerName: 'Sean Garfield',
+    cityName: '绵阳',
+  },
+  {
+    key: '4',
+    travelAgencyName: '风风光光旅行社',
+    ownerName: 'Sofia',
+    cityName: '上海',
   },
 ];
 
