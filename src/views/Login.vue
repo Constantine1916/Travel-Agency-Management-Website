@@ -21,7 +21,7 @@
         >
           <a-input
             v-decorator="[
-              'userName',
+              'username',
               {
                 rules: [{ required: true, message: '请输入用户名!' }],
               },
@@ -91,10 +91,10 @@ export default {
     getImgUrl(i) {
       return require(`../assets/images/login${i + 1}.jpg`)
     },
-    // 仅在触发字段后显示错误 userName
+    // 仅在触发字段后显示错误 username
     userNameError() {
       const { getFieldError, isFieldTouched } = this.form
-      return isFieldTouched('userName') && getFieldError('userName')
+      return isFieldTouched('username') && getFieldError('username')
     },
     // 仅在触发字段后显示错误 password
     passwordError() {
@@ -106,15 +106,16 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
-          // 虚假登录 admin 123456
-          if (values.userName === 'admin' && values.password === '123456') {
-            this.$message.success('登录成功！')
-            // 跳转到home
-            this.$router.push({ path: '/home' })
-          } else {
-            this.$message.error('用户名或密码错误！')
-          }
+          // 调接口处理登录逻辑
+          this.$http.post('login', values).then(res => {
+            if (res.data.flag === 'ok') {
+              this.$message.success('登录成功！')
+              // 跳转到home
+              this.$router.push({ path: '/home' })
+            } else {
+              this.$message.error('用户名或密码错误！')
+            }
+          })
         }
       })
     }
@@ -165,7 +166,7 @@ export default {
     width: 100%;
     flex: 2;
     .title {
-      color: #F5F5F5;
+      color: #f5f5f5;
       padding-bottom: 15px;
       font-size: 18px;
     }
