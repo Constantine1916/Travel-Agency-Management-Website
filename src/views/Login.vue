@@ -110,6 +110,7 @@ export default {
           this.$http.post('login', values).then(res => {
             if (res.data.flag === 'ok') {
               this.$message.success('登录成功！')
+              window.sessionStorage.setItem('user', res.data.user) // 存储user
               // 跳转到home
               this.$router.push({ path: '/home' })
             } else {

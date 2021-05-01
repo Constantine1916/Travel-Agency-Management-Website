@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-04-09 18:04:02
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-10 18:15:06
+ * @LastEditTime : 2021-05-01 18:03:39
  * @FilePath     : \travel-agency-management-website\src\components\Avatar.vue
 -->
 <template>
@@ -25,8 +25,8 @@ export default {
   },
   methods: {
     logout() {
-      // 跳转到login
-      this.$router.push({ path: '/login' })
+      window.sessionStorage.clear(); // 清除session
+      this.$router.push({ path: '/login' }); // 跳转到login
     }
   }
 }

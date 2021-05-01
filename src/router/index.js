@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-09 17:17:39
+ * @LastEditTime : 2021-05-01 18:13:37
  * @FilePath     : \travel-agency-management-website\src\router\index.js
  */
 import Vue from 'vue'
@@ -66,6 +66,21 @@ const routes = [
 const router = new VueRouter({
   routes,
   mode: 'history'
+})
+
+// 挂载路由导航守卫
+router.beforeEach((to, from, next) => {
+  // to 将要进入的路由
+  // from 即将离开的路由
+  // next 是否同行 next(url)-重定向到url上 next()-继续访问to的路径
+
+  if (to.path === '/login') return next();
+  // 获取user
+  const userFlag = window.sessionStorage.getItem('user'); // 取出当前用户
+  if (!userFlag) return next('/login'); // userFlag没有值，则返回登录页
+
+  // 符合要求-有user、同时访问的也不是/login 则放行
+  next();
 })
 
 export default router
