@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-15 17:37:39
+ * @LastEditTime : 2021-05-02 20:52:17
  * @FilePath     : \travel-agency-management-website\src\components\SearchComponent.vue
 -->
 <template>
@@ -29,45 +29,10 @@
   </div>
 </template>
 <script>
-const cityData = [
-  {
-    name: '北京',
-    value: 'beijing'
-  },
-  {
-    name: '成都',
-    value: 'chengdu'
-  },
-  {
-    name: '杭州',
-    value: 'hangzhou'
-  },
-  {
-    name: '深圳',
-    value: 'shenzhen'
-  },
-  {
-    name: '广东',
-    value: 'guangdong'
-  },
-  {
-    name: '绵阳',
-    value: 'mianyang'
-  },
-  {
-    name: '武汉',
-    value: 'wuhan'
-  },
-  {
-    name: '南京',
-    value: 'nanjing'
-  }
-]
-
 export default {
   data() {
     return {
-      cityData, // 城市的数据
+      cityData: [], // 城市的数据
       searchData: { // emit出去的用户录入数据
         travelAgencyName: '', // input v-model
         ownerName: '', // input v-model
@@ -75,7 +40,36 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getCitys();
+  },
   methods: {
+    // 获取数据库中旅行社信息中所有的城市 然后展示在城市下拉中
+    async getCitys() {
+      await this.$http
+        .get('/home/travelAgencyInfoManage')
+        .then(res => {
+          if (res.data.flag === 200) {
+            let tableData = res.data.infos.map(item => {
+              return {
+                ...item,
+                key: item.id
+              }
+            })
+            tableData.forEach(item => {
+              item.cityName && this.cityData.push({
+                name: item.cityName,
+                value: item.cityName
+              })
+            });
+          } else {
+            this.$message.error('获取数据失败，请重试！')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     // 清除数据
     clear() {
       this.searchData = {
@@ -83,11 +77,9 @@ export default {
         ownerName: '',
         cityName: ''
       }
-      console.log('searchData', this.searchData);
     },
     // emit 出去 searchData
     search() {
-      console.log('searchData', this.searchData);
       this.$emit('search', this.searchData)
     },
     // 城市下拉change

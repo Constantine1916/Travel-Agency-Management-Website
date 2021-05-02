@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-28 23:46:57
+ * @LastEditTime : 2021-05-02 21:31:01
  * @FilePath     : \travel-agency-management-website\src\views\TravelAgencyInfoManage.vue
 -->
 <template>
@@ -12,13 +12,24 @@
       <SearchComponent @search="handleSearch"></SearchComponent>
     </div>
     <div class="table">
+      <a-button class="create" title="新增" @click="handleCreate()">
+        <span class="icon iconfont icon-xinzeng"></span>
+      </a-button>
       <a-table :columns="tableColumns" :data-source="tableData">
+        <div slot="operation" slot-scope="text, record">
+          <a-button class="tableButton modify" title="修改" @click="handleModify(record)">
+            <span class="icon iconfont icon-xiugai"></span>
+          </a-button>
+          <a-button class="tableButton delete" title="删除" @click="handleDelete(record.id)">
+            <span class="icon iconfont icon-shanchu"></span>
+          </a-button>
+        </div>
       </a-table>
     </div>
   </div>
 </template>
 <script>
-import SearchComponent from "../components/SearchComponent"
+import SearchComponent from '../components/SearchComponent'
 
 const tableColumns = [
   {
@@ -26,56 +37,30 @@ const tableColumns = [
     dataIndex: 'travelAgencyName',
     key: 'travelAgencyName',
     ellipsis: true,
-    width: 360
+    width: 330
   },
   {
     title: '法定代表人',
     dataIndex: 'ownerName',
     key: 'ownerName',
     ellipsis: true,
-    width: 260
+    width: 230
   },
   {
     title: '旅行社所属地区',
     dataIndex: 'cityName',
     key: 'cityName',
     ellipsis: true,
-    width: 300
+    width: 270
   },
   {
     title: '操作',
     dataIndex: 'operation',
     key: 'operation',
-    // width: 300
+    width: 270,
+    scopedSlots: { customRender: 'operation' }
   }
-];
-
-const tableData = [
-  {
-    key: '1',
-    travelAgencyName: '欢天喜地旅行社',
-    ownerName: 'Sean Park',
-    cityName: '绵阳',
-  },
-  {
-    key: '2',
-    travelAgencyName: '走南闯北旅行社',
-    ownerName: 'Jhon Constantine',
-    cityName: '成都',
-  },
-  {
-    key: '3',
-    travelAgencyName: '世界美景旅行社',
-    ownerName: 'Sean Garfield',
-    cityName: '绵阳',
-  },
-  {
-    key: '4',
-    travelAgencyName: '风风光光旅行社',
-    ownerName: 'Sofia',
-    cityName: '上海',
-  },
-];
+]
 
 export default {
   components: {
@@ -84,24 +69,86 @@ export default {
   data() {
     return {
       tableColumns,
-      tableData,
+      tableData: []
     }
   },
+  mounted() {
+    this.getTravelAgencyInfos()
+  },
   methods: {
+    // 获取列表数据
+    async getTravelAgencyInfos() {
+      await this.$http
+        .get('/home/travelAgencyInfoManage')
+        .then(res => {
+          if (res.data.flag === 200) {
+            this.tableData = res.data.infos.map(item => {
+              return {
+                ...item,
+                key: item.id
+              }
+            })
+          } else {
+            this.$message.error('获取数据失败，请重试！')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     handleSearch(val) {
-      console.log('val', val);
+      console.log('val', val)
+    },
+    handleCreate() {
+      console.log('create')
+    },
+    handleModify(record) {
+      console.log('record', record)
+    },
+    handleDelete(id) {
+      console.log('id', id)
     }
   }
 }
 </script>
 <style lang="scss">
 .travelAgencyInfoManage {
+  height: 100%;
   .searchContainer {
+    height: 52px;
     padding: 10px;
   }
   .table {
+    height: calc(100% - 52px);
+    min-height: 200px;
     width: 100%;
     padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    .create {
+      height: 32px;
+      width: 46px;
+      margin-bottom: 10px;
+      background: #007aff;
+      color: white;
+    }
+    .ant-table-wrapper {
+      width: 100%;
+      height: calc(100% - 42px);
+    }
+    .tableButton {
+      height: 32px;
+      width: 46px;
+      margin-right: 8px;
+      padding: 0;
+    }
+    .modify {
+      background: #f2a73b;
+    }
+    .delete {
+      background: rgb(247, 64, 64);
+    }
   }
 }
 </style>
