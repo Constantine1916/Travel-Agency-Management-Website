@@ -3,13 +3,16 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 00:47:04
+ * @LastEditTime : 2021-05-03 01:21:26
  * @FilePath     : \travel-agency-management-website\src\views\TravelAgencyInfoManage.vue
 -->
 <template>
   <div class="travelAgencyInfoManage">
     <div class="searchContainer">
-      <SearchComponent @search="handleSearch"></SearchComponent>
+      <SearchComponent
+        :cityData="optionData"
+        @search="handleSearch"
+      ></SearchComponent>
     </div>
     <div class="table">
       <a-button class="create" title="新增" @click="handleCreate()">
@@ -87,6 +90,8 @@ export default {
     return {
       tableColumns,
       tableData: [],
+      opData: [], // 临时存储optionData
+      optionData: [],
       visibleTravelAgency: false,
       record: null,
       usage: ''
@@ -102,12 +107,15 @@ export default {
         .get('/home/travelAgencyInfoManage')
         .then(res => {
           if (res.data.flag === 200) {
+            // 获取tableData 表格中的数据
             this.tableData = res.data.infos.map(item => {
               return {
                 ...item,
                 key: item.id
               }
             })
+
+            this.getOptionData() // 每次刷新列表时，也刷新optionData
           } else {
             this.$message.error('获取数据失败，请重试！')
           }
@@ -115,6 +123,26 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    // 获取optionData 查询下拉选择框中的城市数据
+    getOptionData() {
+      debugger
+      this.tableData &&
+        this.tableData.forEach(item => {
+          if (item.cityName) { // 先判断item.cityName有没有值
+            // 再判断optionData中有没有重复的城市名称 没有重复的城市名称才push
+            this.opData.indexOf(item.cityName) === -1 ? this.opData.push(item.cityName) : this.opData;
+          } else {
+            this.opData.push('空')
+          }
+        })
+
+        this.optionData = this.opData.map(element => {
+          return {
+            name: element,
+            value: element
+          }
+        });
     },
     // 查询
     handleSearch(val) {
