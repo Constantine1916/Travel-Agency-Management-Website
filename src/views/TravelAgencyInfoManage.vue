@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-02 21:31:01
+ * @LastEditTime : 2021-05-03 00:47:04
  * @FilePath     : \travel-agency-management-website\src\views\TravelAgencyInfoManage.vue
 -->
 <template>
@@ -17,19 +17,35 @@
       </a-button>
       <a-table :columns="tableColumns" :data-source="tableData">
         <div slot="operation" slot-scope="text, record">
-          <a-button class="tableButton modify" title="修改" @click="handleModify(record)">
+          <a-button
+            class="tableButton modify"
+            title="修改"
+            @click="handleModify(record)"
+          >
             <span class="icon iconfont icon-xiugai"></span>
           </a-button>
-          <a-button class="tableButton delete" title="删除" @click="handleDelete(record.id)">
+          <a-button
+            class="tableButton delete"
+            title="删除"
+            @click="handleDelete(record.id)"
+          >
             <span class="icon iconfont icon-shanchu"></span>
           </a-button>
         </div>
       </a-table>
     </div>
+    <TravelAgency
+      :usage="usage"
+      :record="record"
+      :visible="visibleTravelAgency"
+      @cancel="handleCancel"
+      @refreshTable="getTravelAgencyInfos"
+    ></TravelAgency>
   </div>
 </template>
 <script>
 import SearchComponent from '../components/SearchComponent'
+import TravelAgency from '../components/TravelAgency'
 
 const tableColumns = [
   {
@@ -64,12 +80,16 @@ const tableColumns = [
 
 export default {
   components: {
-    SearchComponent
+    SearchComponent,
+    TravelAgency
   },
   data() {
     return {
       tableColumns,
-      tableData: []
+      tableData: [],
+      visibleTravelAgency: false,
+      record: null,
+      usage: ''
     }
   },
   mounted() {
@@ -96,17 +116,41 @@ export default {
           console.log(err)
         })
     },
+    // 查询
     handleSearch(val) {
       console.log('val', val)
     },
+    // 新增
     handleCreate() {
-      console.log('create')
+      this.visibleTravelAgency = true
+      this.usage = '新增旅行社信息'
     },
+    // 修改
     handleModify(record) {
-      console.log('record', record)
+      this.visibleTravelAgency = true
+      this.record = record
+      this.usage = '修改旅行社信息'
     },
+    // 删除
     handleDelete(id) {
-      console.log('id', id)
+      this.$http
+        .delete('/deleteTravelAgencyInfo?id=' + id)
+        .then(res => {
+          // 调接口删除数据
+          if (res.data === 'success') {
+            this.$message.success('删除数据成功！')
+            this.getTravelAgencyInfos() // 调接口重新刷新表格数据
+          } else {
+            this.$message.error('删除数据失败，请重试！')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 处理模态框关闭事件
+    handleCancel() {
+      this.visibleTravelAgency = false
     }
   }
 }
