@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 23:20:58
+ * @LastEditTime : 2021-05-04 01:24:16
  * @FilePath     : \travel-agency-management-website\src\views\Home.vue
 -->
 <template>
@@ -15,6 +15,12 @@
       </a-cascader>
     </div>
     <div class="cardContainer">
+      <div v-if="!cardData.length" style="position: relative;">
+        <div class="words">
+          欢迎使用旅行社管理网站！
+        </div>
+        <img  :src="require('../assets/images/welcome.jpg')" alt="欢迎" class="welcomeImg" />
+      </div>
       <template v-for="card in cardData">
         <div class="card">
           <a-card hoverable @click="cardClick(card)">
@@ -143,7 +149,7 @@ export default {
     }
   },
   mounted() {
-    this.getTravelAgencyInfos();
+    this.getTravelAgencyInfos()
   },
   methods: {
     async getTravelAgencyInfos() {
@@ -158,7 +164,7 @@ export default {
                 key: item.id
               }
             })
-            console.log('travelAgencyData', this.travelAgencyData);
+            console.log('travelAgencyData', this.travelAgencyData)
           } else {
             this.$message.error('获取数据失败，请重试！')
           }
@@ -168,30 +174,35 @@ export default {
         })
     },
     changeCity(value, selectedOptions) {
-      let lastValue = value.pop();
-      this.cityName = selectedOptions.map(o => o.label).join(', ');
+      let lastValue = value.pop()
+      this.cityName = selectedOptions.map(o => o.label).join(', ')
       this.cityScenic.forEach(item => {
-        item.name === lastValue ? this.cardData = item.scenic : this.cardData;
-      });
-      console.log('this.cardData', this.cardData);
+        item.name === lastValue ? (this.cardData = item.scenic) : this.cardData
+      })
+      console.log('this.cardData', this.cardData)
     },
     cardClick(val) {
-      this.scenicSpot = val.scenicSpot;
-      this.handleShowData(val.index);
-      this.visibleCardPage = true;
+      this.scenicSpot = val.scenicSpot
+      this.handleShowData(val.index)
+      this.visibleCardPage = true
     },
     handleShowData(index) {
-      const num = Math.floor(this.travelAgencyData.length / this.cardData.length);
+      const num = Math.floor(
+        this.travelAgencyData.length / this.cardData.length
+      )
       this.travelAgencyData.forEach(item => {
         this.cooperationData.push(item.travelAgencyName)
-      });
-      this.cooperationData = this.cooperationData.slice( (index - 1) * num, index * num);
-      console.log('this.cooperationData',this.cooperationData);
+      })
+      this.cooperationData = this.cooperationData.slice(
+        (index - 1) * num,
+        index * num
+      )
+      console.log('this.cooperationData', this.cooperationData)
     },
     // 处理模态框关闭事件
     handleCancel() {
-      this.visibleCardPage = false;
-      this.cooperationData = []; // 关闭模态框情况合作旅行社的数据
+      this.visibleCardPage = false
+      this.cooperationData = [] // 关闭模态框情况合作旅行社的数据
     }
   }
 }
@@ -212,6 +223,20 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    .words {
+      width: 100%;
+      font-size: 20px;
+      font-weight: 600;
+      font-style: italic;
+      position: absolute;
+      top: 75%;
+      left: 50%;
+      transform: translate(-50%, -50%)
+    }
+    .welcomeImg {
+      width: 100%;
+      height: 100%;
+    }
     .card {
       flex: 1;
       display: flex;
