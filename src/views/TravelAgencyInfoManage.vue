@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 01:21:26
+ * @LastEditTime : 2021-05-03 11:05:55
  * @FilePath     : \travel-agency-management-website\src\views\TravelAgencyInfoManage.vue
 -->
 <template>
@@ -126,7 +126,6 @@ export default {
     },
     // 获取optionData 查询下拉选择框中的城市数据
     getOptionData() {
-      debugger
       this.tableData &&
         this.tableData.forEach(item => {
           if (item.cityName) { // 先判断item.cityName有没有值
