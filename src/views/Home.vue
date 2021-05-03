@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-04-10 22:40:16
+ * @LastEditTime : 2021-05-03 23:20:58
  * @FilePath     : \travel-agency-management-website\src\views\Home.vue
 -->
 <template>
@@ -17,7 +17,7 @@
     <div class="cardContainer">
       <template v-for="card in cardData">
         <div class="card">
-          <a-card hoverable>
+          <a-card hoverable @click="cardClick(card)">
             <img
               slot="cover"
               :src="require('../assets/images/' + card.img + '.jpg')"
@@ -31,9 +31,17 @@
         </div>
       </template>
     </div>
+    <CardPage
+      :visible="visibleCardPage"
+      :scenicSpot="scenicSpot"
+      :cooperationData="cooperationData"
+      @cancel="handleCancel"
+    ></CardPage>
   </div>
 </template>
 <script>
+import CardPage from '../components/CardPage'
+
 const options = [
   {
     value: 'sichuan',
@@ -70,14 +78,17 @@ const cityScenic = [
     name: 'chengdu',
     scenic: [
       {
+        index: 1,
         scenicSpot: '锦里',
         img: 'chengduJinLi'
       },
       {
+        index: 2,
         scenicSpot: '宽窄巷子',
         img: 'chengduKuanZhai'
       },
       {
+        index: 3,
         scenicSpot: '西岭雪山',
         img: 'chengduXiLing'
       }
@@ -87,6 +98,7 @@ const cityScenic = [
     name: 'mianyang',
     scenic: [
       {
+        index: 1,
         scenicSpot: '仙海',
         img: 'mianyangXianHai'
       }
@@ -96,6 +108,7 @@ const cityScenic = [
     name: 'nanjing',
     scenic: [
       {
+        index: 1,
         scenicSpot: '中山陵',
         img: 'nanjingZhongShanLing'
       }
@@ -105,6 +118,7 @@ const cityScenic = [
     name: 'xuzhou',
     scenic: [
       {
+        index: 1,
         scenicSpot: '云龙山',
         img: 'xuzhouYunLongShan'
       }
@@ -113,15 +127,46 @@ const cityScenic = [
 ]
 
 export default {
+  components: {
+    CardPage
+  },
   data() {
     return {
       cityName: '请选择城市',
       options,
       cityScenic,
-      cardData: []
+      cardData: [],
+      travelAgencyData: [],
+      visibleCardPage: false,
+      scenicSpot: null, // 存储要打开的景区名称
+      cooperationData: [] // 存储景区合作旅行社数据
     }
   },
+  mounted() {
+    this.getTravelAgencyInfos();
+  },
   methods: {
+    async getTravelAgencyInfos() {
+      await this.$http
+        .get('/travelAgencyInfoManage')
+        .then(res => {
+          if (res.data.flag === 200) {
+            // 获取tableData 表格中的数据
+            this.travelAgencyData = res.data.infos.map(item => {
+              return {
+                ...item,
+                key: item.id
+              }
+            })
+            console.log('travelAgencyData', this.travelAgencyData);
+          } else {
+            this.$message.error('获取数据失败，请重试！')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     changeCity(value, selectedOptions) {
       let lastValue = value.pop();
       this.cityName = selectedOptions.map(o => o.label).join(', ');
@@ -129,6 +174,24 @@ export default {
         item.name === lastValue ? this.cardData = item.scenic : this.cardData;
       });
       console.log('this.cardData', this.cardData);
+    },
+    cardClick(val) {
+      this.scenicSpot = val.scenicSpot;
+      this.handleShowData(val.index);
+      this.visibleCardPage = true;
+    },
+    handleShowData(index) {
+      const num = Math.floor(this.travelAgencyData.length / this.cardData.length);
+      this.travelAgencyData.forEach(item => {
+        this.cooperationData.push(item.travelAgencyName)
+      });
+      this.cooperationData = this.cooperationData.slice( (index - 1) * num, index * num);
+      console.log('this.cooperationData',this.cooperationData);
+    },
+    // 处理模态框关闭事件
+    handleCancel() {
+      this.visibleCardPage = false;
+      this.cooperationData = []; // 关闭模态框情况合作旅行社的数据
     }
   }
 }

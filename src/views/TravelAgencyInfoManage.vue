@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 14:37:56
+ * @LastEditTime : 2021-05-03 22:35:22
  * @FilePath     : \travel-agency-management-website\src\views\TravelAgencyInfoManage.vue
 -->
 <template>
@@ -177,7 +177,7 @@ export default {
     },
     // 处理模态框关闭事件
     handleCancel() {
-      this.visibleTravelAgency = false
+      this.visibleTravelAgency = false;
     }
   }
 }

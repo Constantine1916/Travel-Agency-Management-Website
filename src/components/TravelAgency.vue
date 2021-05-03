@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-05-02 21:36:25
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 00:44:00
+ * @LastEditTime : 2021-05-03 22:31:13
  * @FilePath     : \travel-agency-management-website\src\components\TravelAgency.vue
 -->
 <template>
@@ -72,7 +72,7 @@
 
 <script>
 export default {
-  name: 'travelAgency',
+  name: 'TravelAgency',
   props: {
     usage: {
       type: String
