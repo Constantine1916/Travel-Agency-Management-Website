@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 12:46:26
+ * @LastEditTime : 2021-05-03 14:55:59
  * @FilePath     : \travel-agency-management-website\src\views\AccountManage.vue
 -->
 <template>
@@ -69,7 +69,7 @@
       </a-form-item>
       <a-form-item v-bind="formItemLayout">
         <span slot="label">
-          用户名&nbsp;
+          昵称&nbsp;
           <a-tooltip title="您想要别人怎么称呼您?">
             <a-icon type="question-circle-o" />
           </a-tooltip>

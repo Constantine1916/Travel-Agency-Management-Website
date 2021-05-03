@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 11:05:55
+ * @LastEditTime : 2021-05-03 14:37:56
  * @FilePath     : \travel-agency-management-website\src\views\TravelAgencyInfoManage.vue
 -->
 <template>
@@ -104,7 +104,7 @@ export default {
     // 获取列表数据
     async getTravelAgencyInfos() {
       await this.$http
-        .get('/home/travelAgencyInfoManage')
+        .get('/travelAgencyInfoManage')
         .then(res => {
           if (res.data.flag === 200) {
             // 获取tableData 表格中的数据
