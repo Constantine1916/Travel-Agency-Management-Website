@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 12:10:08
+ * @LastEditTime : 2021-05-03 12:46:26
  * @FilePath     : \travel-agency-management-website\src\views\AccountManage.vue
 -->
 <template>
@@ -263,8 +263,20 @@ export default {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           values.home = values.home[1] // 获取城市名称即可
-          console.log('Received values of form: ', values)
-          console.log('id', this.$store.state.id)
+          values.id = this.$store.state.id; // 传入当前用户id 用作后端修改数据时的标识
+          // 调接口修改用户信息
+          this.$http
+            .post('/editUser', values)
+            .then(res => {
+              if (res.data === 'success') {
+                this.$message.success('修改账号信息成功！')
+              } else {
+                this.$message.error('修改账号信息失败，请重试！')
+              }
+            })
+            .catch(err => {
+              console.log(err)
+            })
         }
       })
     },

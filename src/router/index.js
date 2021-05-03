@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-01 18:13:37
+ * @LastEditTime : 2021-05-03 13:39:31
  * @FilePath     : \travel-agency-management-website\src\router\index.js
  */
 import Vue from 'vue'
@@ -54,6 +54,11 @@ const routes = [
         name: '查看景区人数',
         path: 'scenicSpotNumber',
         component: () => import(/* webpackChunkName: "about" */ '../views/ScenicSpotNumber.vue')
+      },
+      {
+        name: '我的信息',
+        path: 'myInfos',
+        component: () => import(/* webpackChunkName: "about" */ '../views/MyInfos.vue')
       },
       {
         path: '*',

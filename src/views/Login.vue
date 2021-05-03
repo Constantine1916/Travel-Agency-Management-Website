@@ -113,8 +113,7 @@ export default {
               if (res.data.flag === 'ok') {
                 this.$message.success('登录成功！')
                 window.sessionStorage.setItem('user', res.data.user) // 存储user
-                this.$store.commit('updateId', res.data.id)
-                console.log('id',this.$store.state.id);
+                this.$store.commit('updateId', res.data.id) // 存储账户id到vuex中
                 // 跳转到home
                 this.$router.push({ path: '/home' })
               } else {
