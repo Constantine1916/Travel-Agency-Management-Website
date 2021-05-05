@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-04 22:46:39
+ * @LastEditTime : 2021-05-05 14:31:46
  * @FilePath     : \travel-agency-management-website\src\views\ScenicSpotTicket.vue
 -->
 <template>
@@ -101,9 +101,6 @@ export default {
   },
   methods: {
     onChange(value, id) {
-      console.log('changed', value);
-      console.log('id', id);
-      
     },
     submit(id, present) {
       let number = document.getElementsByClassName('ant-input-number-input')[id - 1].value;

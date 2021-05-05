@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-05-02 21:36:25
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 22:31:13
+ * @LastEditTime : 2021-05-05 14:32:19
  * @FilePath     : \travel-agency-management-website\src\components\TravelAgency.vue
 -->
 <template>
@@ -97,8 +97,6 @@ export default {
       this.form.validateFields((err, values) => {
         // 如果有错就return
         if (err) return
-
-        console.log('Received values of form: ', values)
         // 没错就判断usage，依据usage执行相应的新增修改逻辑
         if (this.usage === '新增旅行社信息') {
           this.$http

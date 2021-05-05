@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-05 12:45:58
+ * @LastEditTime : 2021-05-05 14:30:37
  * @FilePath     : \travel-agency-management-website\src\views\Home.vue
 -->
 <template>
@@ -204,7 +204,6 @@ export default {
                 key: item.id
               }
             })
-            console.log('travelAgencyData', this.travelAgencyData)
           } else {
             this.$message.error('获取数据失败，请重试！')
           }
@@ -219,7 +218,6 @@ export default {
       this.cityScenic.forEach(item => {
         item.name === lastValue ? (this.cardData = item.scenic) : this.cardData
       })
-      console.log('this.cardData', this.cardData)
     },
     cardClick(val) {
       this.scenicSpot = val.scenicSpot
@@ -237,7 +235,6 @@ export default {
         (index - 1) * num,
         index * num
       )
-      console.log('this.cooperationData', this.cooperationData)
     },
     // 处理模态框关闭事件
     handleCancel() {
