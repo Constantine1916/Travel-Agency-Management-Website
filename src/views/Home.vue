@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-04 23:51:15
+ * @LastEditTime : 2021-05-05 12:45:58
  * @FilePath     : \travel-agency-management-website\src\views\Home.vue
 -->
 <template>
@@ -14,8 +14,8 @@
         <a href="#">Change city</a>
       </a-cascader>
     </div>
-    <div class="cardContainer">
-      <div v-if="!cardData.length" style="position: relative;">
+    <div class="cardContainer" style="position: relative;">
+      <div v-if="!cardData.length" >
         <div class="words">
           欢迎使用旅行社管理网站！
         </div>
