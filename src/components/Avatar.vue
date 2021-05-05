@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-04-09 18:04:02
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 13:45:55
+ * @LastEditTime : 2021-05-04 22:49:59
  * @FilePath     : \travel-agency-management-website\src\components\Avatar.vue
 -->
 <template>
@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     accoutManage() {
-      console.log('accoutManage')
       this.$router.push({ path: `/home/myInfos` }).catch(err => {
         this.$message.warn('您已在当前页面！')
       })

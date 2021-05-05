@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-04 01:24:16
+ * @LastEditTime : 2021-05-04 23:51:15
  * @FilePath     : \travel-agency-management-website\src\views\Home.vue
 -->
 <template>
@@ -76,6 +76,16 @@ const options = [
         label: '徐州'
       }
     ]
+  },
+  {
+    value: 'yunnan',
+    label: '云南',
+    children: [
+      {
+        value: 'kunming',
+        label: '昆明'
+      }
+    ]
   }
 ]
 
@@ -107,6 +117,11 @@ const cityScenic = [
         index: 1,
         scenicSpot: '仙海',
         img: 'mianyangXianHai'
+      },
+      {
+        index: 2,
+        scenicSpot: '香草园',
+        img: 'mianyangXiangCaoYuan'
       }
     ]
   },
@@ -127,6 +142,31 @@ const cityScenic = [
         index: 1,
         scenicSpot: '云龙山',
         img: 'xuzhouYunLongShan'
+      }
+    ]
+  },
+  {
+    name: 'kunming',
+    scenic: [
+      {
+        index: 1,
+        scenicSpot: '大理',
+        img: 'kunmingDaLi'
+      },
+      {
+        index: 2,
+        scenicSpot: '丽江',
+        img: 'kunmingLiJiang'
+      },
+      {
+        index: 3,
+        scenicSpot: '洱海',
+        img: 'kunmingErHai'
+      },
+      {
+        index: 3,
+        scenicSpot: '云南野生动物园',
+        img: 'kunmingYunNanYeShengDongWuYuan'
       }
     ]
   }
