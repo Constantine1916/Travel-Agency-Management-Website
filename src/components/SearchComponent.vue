@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 01:14:24
+ * @LastEditTime : 2021-05-24 22:54:58
  * @FilePath     : \travel-agency-management-website\src\components\SearchComponent.vue
 -->
 <template>
@@ -52,6 +52,7 @@ export default {
         ownerName: '',
         cityName: ''
       }
+      this.$emit('clear')
     },
     // emit 出去 searchData
     search() {

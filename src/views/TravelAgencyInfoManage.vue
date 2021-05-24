@@ -3,7 +3,7 @@
  * @Author       : sunjr
  * @Date         : 2021-03-12 12:33:22
  * @LastEditors  : sunjr
- * @LastEditTime : 2021-05-03 22:35:22
+ * @LastEditTime : 2021-05-24 23:00:20
  * @FilePath     : \travel-agency-management-website\src\views\TravelAgencyInfoManage.vue
 -->
 <template>
@@ -12,6 +12,7 @@
       <SearchComponent
         :cityData="optionData"
         @search="handleSearch"
+        @clear="handleClear"
       ></SearchComponent>
     </div>
     <div class="table">
@@ -128,24 +129,70 @@ export default {
     getOptionData() {
       this.tableData &&
         this.tableData.forEach(item => {
-          if (item.cityName) { // 先判断item.cityName有没有值
+          if (item.cityName) {
+            // 先判断item.cityName有没有值
             // 再判断optionData中有没有重复的城市名称 没有重复的城市名称才push
-            this.opData.indexOf(item.cityName) === -1 ? this.opData.push(item.cityName) : this.opData;
+            this.opData.indexOf(item.cityName) === -1
+              ? this.opData.push(item.cityName)
+              : this.opData
           } else {
             this.opData.push('空')
           }
         })
 
-        this.optionData = this.opData.map(element => {
-          return {
-            name: element,
-            value: element
-          }
-        });
+      this.optionData = this.opData.map(element => {
+        return {
+          name: element,
+          value: element
+        }
+      })
     },
     // 查询
     handleSearch(val) {
-      console.log('val', val)
+      this.$http
+        .post('/queryInfos', val)
+        .then(res => {
+          // 调接口删除数据
+          if (res.data.flag === 200) {
+            // 获取tableData 表格中的数据
+            this.tableData = res.data.data.map(item => {
+              return {
+                ...item,
+                key: item.id
+              }
+            })
+
+            this.getOptionData() // 每次刷新列表时，也刷新optionData
+          } else {
+            this.$message.error('获取数据失败，请重试！')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 清除数据
+    handleClear() {
+      this.$http
+        .get('/travelAgencyInfoManage')
+        .then(res => {
+          if (res.data.flag === 200) {
+            // 获取tableData 表格中的数据
+            this.tableData = res.data.infos.map(item => {
+              return {
+                ...item,
+                key: item.id
+              }
+            })
+
+            this.getOptionData() // 每次刷新列表时，也刷新optionData
+          } else {
+            this.$message.error('获取数据失败，请重试！')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     // 新增
     handleCreate() {
@@ -177,7 +224,7 @@ export default {
     },
     // 处理模态框关闭事件
     handleCancel() {
-      this.visibleTravelAgency = false;
+      this.visibleTravelAgency = false
     }
   }
 }
