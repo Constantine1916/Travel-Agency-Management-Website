@@ -1,0 +1,83 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2524726 */
+  src: url('iconfont.woff2?t=1620023087610') format('woff2'),
+       url('iconfont.woff?t=1620023087610') format('woff'),
+       url('iconfont.ttf?t=1620023087610') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-email:before {
+  content: "\e627";
+  font-size: 14px;
+}
+
+.icon-telephonenumber:before {
+  content: "\e65a";
+}
+
+.icon-shouji:before {
+  content: "\e6a1";
+}
+
+.icon-password:before {
+  content: "\e606";
+}
+
+.icon-zhongguojie:before {
+  content: "\e6a0";
+  color: red;
+}
+
+.icon-password1:before {
+  content: "\e608";
+}
+
+.icon-home:before {
+  content: "\e6f0";
+}
+
+.icon-emailFilled:before {
+  content: "\e63c";
+}
+
+.icon-username:before {
+  content: "\e73f";
+}
+
+.icon-home1:before {
+  content: "\e813";
+}
+
+.icon-Homehomepagemenu:before {
+  content: "\e9db";
+}
+
+.icon-Password:before {
+  content: "\e752";
+}
+
+.icon-si-glyph-phone-number:before {
+  content: "\e670";
+}
+
+.icon-xinzeng:before {
+  content: "\e7e4";
+  color: rgb(253, 244, 244);
+}
+
+.icon-shanchu:before {
+  content: "\e652";
+  color: rgb(253, 244, 244);
+}
+
+.icon-xiugai:before {
+  content: "\e651";
+  color: rgb(253, 244, 244);
+}
